@@ -13,7 +13,7 @@ public class Root extends Serveur // Serveur contacté par le resolver qui renvo
     public void run() //méthode appelée lors de l'exécution d'objet sur un thread
     {
         super.run(); // Éxécute ce qui est dans le run du parent
-        System.out.println("Root");
+        //System.out.println("Root");
         String resolverReq = "";
         while (resolverReq.equals(""))
         {

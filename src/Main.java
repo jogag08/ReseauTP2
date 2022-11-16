@@ -4,7 +4,7 @@ public class Main
     {
         Client client = new Client("127.0.0.1", 4000);
 
-        Resolver resolver = new Resolver(4000, "127.0.0.1", 4001);
+        Resolver resolver = new Resolver(4000, "127.0.0.1", 4001, "127.0.0.1", 4002, "127.0.0.1", 4003, "127.0.0.1", 4004, "127.0.0.1", 4005);
         Root rootserver = new Root(4001);
         TLD tld1 = new TLD(4002);
         TLD tld2 = new TLD(4003);

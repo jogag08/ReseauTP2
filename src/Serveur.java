@@ -24,8 +24,6 @@ public class Serveur implements Runnable
             socket = serverSocket.accept(); // Bloque ici tant que personne est connecté
             dataInputStream = new DataInputStream(socket.getInputStream()); // Récupère la référence vers l'input stream du socket
             dataOutputStream = new DataOutputStream(socket.getOutputStream()); // Récupère la référence vers l'output stream du socket
-
-
         }
         catch (Exception e)
         {
