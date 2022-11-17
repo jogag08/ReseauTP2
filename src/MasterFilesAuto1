@@ -1,0 +1,10 @@
+    NS  blog
+    NS  centurion
+    NS  gnuherd
+    NS  inverse
+    NS  tuxmux
+blog    A   198.16.148.105
+centurion   A   148.87.148.105
+gnuherd A   69.17.206.10
+inverse A   42.80.0.85
+tuxmux  A   206.198.08.05

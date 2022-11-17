@@ -30,13 +30,19 @@ public class Resolver extends Serveur //Premier serveur contacté par le client 
        this.rootPort = rootPort;
        this.tld1IP = tld1IP;
        this.tld1Port= tld1Port;
+       this.tld2IP = tld2IP;
+       this.tld2Port= tld2Port;
+       this.authoritative1IP = authoritative1IP;
+       this.authoritative1Port = authoritative1Port;
+       this.authoritative2IP = authoritative2IP;
+       this.authoritative2Port = authoritative2Port;
    }
 
     @Override
     public void run() //méthode appelée lors de l'exécution d'objet sur un thread
     {
         super.run(); // Éxécute ce qui est dans le run du parent
-        System.out.println("Resolver");
+        System.out.println("Entrez un nom de domaine : ");
         String clientReq = "";
         while (clientReq.equals("")) {
             try {
@@ -45,7 +51,7 @@ public class Resolver extends Serveur //Premier serveur contacté par le client 
                 System.out.println(e);
             }
         }
-        System.out.println("Du Resolver : " + clientReq);
+        //System.out.println("Du Resolver : " + clientReq);
 
         //Partie qui communique avec le root (Resolver a Root)
         while (connectionOpened)
@@ -75,16 +81,16 @@ public class Resolver extends Serveur //Premier serveur contacté par le client 
                 }
             }
 
-            if (hasCommunicatedWithRoot && hasCommunicatedWithTLD && hasCommunicatedWithAuthoritative)
+            if (hasCommunicatedWithRoot && hasCommunicatedWithTLD && !hasCommunicatedWithAuthoritative)
             {
                 try {
                     socketServeur = new Socket(authoritative1IP, authoritative1Port);
                     dataInputStreamServeur = new DataInputStream(socketServeur.getInputStream());
                     dataOutputStreamServeur = new DataOutputStream(socketServeur.getOutputStream());
                     dataOutputStreamServeur.writeUTF(clientReq);
-                    hasCommunicatedWithTLD = true;
+                    hasCommunicatedWithAuthoritative = true;
                 } catch (Exception e) {
-                    System.out.println(e + "resolver à tld1");
+                    System.out.println(e + "resolver à authoritative");
                 }
             }
         }

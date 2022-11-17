@@ -25,6 +25,6 @@ public class TLD extends Serveur // Serveur contacté par le Resolver
                 System.out.println(e + "TLD");
             }
         }
-        System.out.println("Du TLD : " + resolverReq);
+        //System.out.println("Du TLD : " + resolverReq);
     }
 }
