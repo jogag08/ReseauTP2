@@ -37,6 +37,8 @@ public class Root extends Serveur // Serveur contacté par le resolver qui renvo
         q = switchToResponse(in);
         String name = getName(q, getLen(q));
 
+        q += name;
+
         return q;
     }
 
