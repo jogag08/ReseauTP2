@@ -1,6 +1,6 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.net.Socket;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Root extends Serveur // Serveur contacté par le resolver qui renvoie l'addresse IP du TLDserveur approprié
 {
@@ -20,6 +20,8 @@ public class Root extends Serveur // Serveur contacté par le resolver qui renvo
             try
             {
                 resolverReq = dataInputStream.readUTF();
+                String line = toResponseFormat(resolverReq);
+                dataOutputStream.writeUTF(line);
             }
             catch (Exception e)
             {
@@ -28,6 +30,7 @@ public class Root extends Serveur // Serveur contacté par le resolver qui renvo
         }
         System.out.println("Q : " + resolverReq);
         System.out.println("R : " + toResponseFormat(resolverReq));
+        System.out.println("------------");
     }
 
     public String toResponseFormat(String in)
@@ -36,8 +39,11 @@ public class Root extends Serveur // Serveur contacté par le resolver qui renvo
 
         q = switchToResponse(in);
         String name = getName(q, getLen(q));
+        String type = "0000000000000001";
+        String rClass = "0000000000000001";
+        String ttl ="00000000000000000000000000000030";
 
-        q += name;
+        q += name + type + rClass + ttl;
 
         return q;
     }
@@ -61,5 +67,26 @@ public class Root extends Serveur // Serveur contacté par le resolver qui renvo
         String rightOfQr = in.substring(17);
         String newResp = id + "1" + rightOfQr;
         return newResp;
+    }
+
+    public String readFile(String in)
+    {
+        try
+        {
+            File f = new File("MasterFilesRoot.txt");
+            Scanner scan = new Scanner(f);
+            while(scan.hasNextLine())
+            {
+                String info = scan.nextLine();
+                System.out.println(info);
+            }
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

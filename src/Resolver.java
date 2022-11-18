@@ -51,9 +51,7 @@ public class Resolver extends Serveur //Premier serveur contacté par le client 
                 System.out.println(e);
             }
         }
-        //System.out.println("Du Resolver : " + clientReq);
 
-        //Partie qui communique avec le root (Resolver a Root)
         while (connectionOpened)
         {
             if (!hasCommunicatedWithRoot) {
@@ -63,6 +61,8 @@ public class Resolver extends Serveur //Premier serveur contacté par le client 
                     dataOutputStreamServeur = new DataOutputStream(socketServeur.getOutputStream());
                     dataOutputStreamServeur.writeUTF(clientReq);
                     hasCommunicatedWithRoot = true;
+                    clientReq = dataInputStreamServeur.readUTF();
+                    //System.out.println(clientReq);
                 } catch (Exception e) {
                     System.out.println(e + "resolver à root");
                 }
@@ -76,6 +76,7 @@ public class Resolver extends Serveur //Premier serveur contacté par le client 
                     dataOutputStreamServeur = new DataOutputStream(socketServeur.getOutputStream());
                     dataOutputStreamServeur.writeUTF(clientReq);
                     hasCommunicatedWithTLD = true;
+                    clientReq = dataInputStreamServeur.readUTF();
                 } catch (Exception e) {
                     System.out.println(e + "resolver à tld1");
                 }
@@ -89,6 +90,7 @@ public class Resolver extends Serveur //Premier serveur contacté par le client 
                     dataOutputStreamServeur = new DataOutputStream(socketServeur.getOutputStream());
                     dataOutputStreamServeur.writeUTF(clientReq);
                     hasCommunicatedWithAuthoritative = true;
+                    clientReq = dataInputStreamServeur.readUTF();
                 } catch (Exception e) {
                     System.out.println(e + "resolver à authoritative");
                 }
